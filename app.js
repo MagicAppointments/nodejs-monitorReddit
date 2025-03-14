@@ -321,13 +321,56 @@ async function sendCommentsInboxToWebhook(data) {
   }
 }
 
-// Função principal para iniciar o serviço de monitoramento de comentários e inbox
-async function startMonitoringCommentsInbox() {
-  // Função de inicialização específica para comentários e inbox
-  console.log(
-    "Comment Responder & Inbox Monitor: Serviço de monitoramento de comentários e inbox iniciado..."
-  );
-  setupDailyScheduleCommentsInbox(); // Configura o agendamento diário para comentários e inbox
+// Função para configurar o agendamento diário 
+function setupDailySchedule() {
+  console.log("Setting up daily schedule with 60-minute runs...");
+
+  // Agendar para rodar às 9h da manhã (horário do servidor)
+  cron.schedule("0 9 * * *", async () => {
+    console.log("Running scheduled job at 9am for 60 minutes...");
+    // Iniciar o monitoramento e guardar os IDs dos intervalos
+    postMonitoringIntervalId = await monitorPosts();
+
+    // Agendar para parar o monitoramento após 60 minutos (3600000 milissegundos)
+    setTimeout(stopMonitoring, 3600000);
+
+    console.log("Scheduled job at 9am started, will run for 60 minutes.");
+  });
+
+  // Agendar para rodar às 13h (1 da tarde) (horário do servidor)
+  cron.schedule("0 13 * * *", async () => {
+    console.log("Running scheduled job at 1pm for 60 minutes...");
+    // Iniciar o monitoramento e guardar os IDs dos intervalos
+    postMonitoringIntervalId = await monitorPosts();
+
+    // Agendar para parar o monitoramento após 60 minutos
+    setTimeout(stopMonitoring, 3600000);
+
+    console.log("Scheduled job at 1pm started, will run for 60 minutes.");
+  });
+
+  // Agendar para rodar às 20h (8 da noite) (horário do servidor)
+  cron.schedule("0 20 * * *", async () => {
+    console.log("Running scheduled job at 8pm for 60 minutes...");
+    // Iniciar o monitoramento e guardar os IDs dos intervalos
+    postMonitoringIntervalId = await monitorPosts();
+
+    // Agendar para parar o monitoramento após 60 minutos
+    setTimeout(stopMonitoring, 3600000);
+
+    console.log("Scheduled job at 8pm started, will run for 60 minutes.");
+  });
+
+  console.log("Daily schedule setup with 60-minute runs complete.");
+}
+
+// Função para iniciar o monitoramento (MODIFICADO - USA setupDailySchedule)
+async function startMonitoring() {
+  console.log("Monitoring service started...");
+
+  // Configurar o agendamento diário (ADICIONADO - CHAMA setupDailySchedule)
+  setupDailySchedule();
+
   console.log(
     "Comment Responder & Inbox Monitor: Heartbeat: App está rodando em:",
     new Date()
