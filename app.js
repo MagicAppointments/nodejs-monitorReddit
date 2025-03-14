@@ -1,5 +1,10 @@
-// comment_responder_inbox_monitor.js
 require("dotenv").config();
+console.log("CLIENT_ID:", process.env.REDDIT_CLIENT_ID);
+console.log("CLIENT_SECRET:", process.env.REDDIT_CLIENT_SECRET);
+console.log("USERNAME:", process.env.REDDIT_USERNAME);
+console.log("PASSWORD:", process.env.REDDIT_PASSWORD);
+console.log("USER_AGENT:", process.env.REDDIT_USER_AGENT);
+console.log("WEBHOOK_URL:", process.env.POST_WEBHOOK_URL);
 
 const Snoowrap = require("snoowrap");
 const fetch = require("node-fetch");
