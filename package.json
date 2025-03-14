@@ -1,7 +1,7 @@
 {
   "name": "monitorreddit-comment",
   "version": "1.0.0",
-  "description": "A Node.js script to answer comments from Reddit's user",
+  "description": "A Node.js script to answer posts from Reddit's user",
   "main": "app.js",
   "author": "Carlos",
   "license": "MIT",
