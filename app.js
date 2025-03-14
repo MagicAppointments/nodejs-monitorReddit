@@ -11,7 +11,7 @@ const redditClientSecret = process.env.REDDIT_CLIENT_SECRET;
 const redditUsername = process.env.REDDIT_USERNAME;
 const redditPassword = process.env.REDDIT_PASSWORD;
 const redditUserAgent = process.env.REDDIT_USER_AGENT;
-const commentWebhookUrl = process.env.COMMENT_WEBHOOK_URL; // Webhook específico para comentários e inbox
+const commentWebhookUrl = process.env.COMMENT_WEBHOOK_URL;
 
 // Configuração da API do Reddit usando Snoowrap
 let reddit;
